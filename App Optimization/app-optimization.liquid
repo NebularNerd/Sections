@@ -131,10 +131,12 @@
         var eventFn = partial(loadOnScroll, loadRule.originalUrl);
         var eventOptions = supportsPassive ? {passive: true} : false;
         window.addEventListener('scroll', eventFn, eventOptions);
+        window.addEventListener('mousemove', eventFn, eventOptions);
+        window.addEventListener('touchstart', eventFn, eventOptions);
 
         function loadOnScroll(src) {
           loadScript(src);
-          window.removeEventListener('scroll', eventFn, eventOptions);
+          window.removeEventListener(event.type, eventFn, eventOptions); 
         }
       }
 
